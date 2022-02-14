@@ -9,8 +9,13 @@ import com.citesoftware.mediamonkstechchallenge.R
 
 class AlbumAdapter(private val albumList: MutableList<AlbumDataModel>): RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
-    inner class AlbumViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class AlbumViewHolder(itemView: View, listener: onItemClickListener): RecyclerView.ViewHolder(itemView){
 
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
         private val tvAlbumTitle: TextView = itemView.findViewById(R.id.tvAlbumTitle)
 
         fun bindView(albumList: AlbumDataModel){
@@ -19,9 +24,20 @@ class AlbumAdapter(private val albumList: MutableList<AlbumDataModel>): Recycler
         }
     }
 
+    private lateinit var mListener : onItemClickListener
+
+    interface onItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+
+        mListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_album, parent, false)
-        return AlbumViewHolder(view)
+        return AlbumViewHolder(view, mListener)
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {

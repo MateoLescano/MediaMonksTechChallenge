@@ -10,8 +10,6 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"

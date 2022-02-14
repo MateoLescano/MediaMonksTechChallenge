@@ -18,11 +18,15 @@ class PhotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo)
 
+        val albumId = intent.getIntExtra("albumId", 1)
+
         val builder = ServiceBuilder.build(InterfaceAPI::class.java)
 
-        val llamar = builder.getPhotos(2)
+        val llamar = builder.getPhotos(albumId)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rvPhoto)
+
+
 
         llamar.enqueue(object : Callback<MutableList<PhotoDataModel>> {
             override fun onResponse(
