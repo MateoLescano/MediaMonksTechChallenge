@@ -13,20 +13,23 @@ import com.citesoftware.mediamonkstechchallenge.Album.AlbumDataModel
 import com.citesoftware.mediamonkstechchallenge.APIrest.ServiceBuilder
 import com.citesoftware.mediamonkstechchallenge.Album.AlbumAdapter
 import com.citesoftware.mediamonkstechchallenge.Photo.PhotoActivity
+import com.citesoftware.mediamonkstechchallenge.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val builder = ServiceBuilder.build(InterfaceAPI::class.java)
 
         val llamar = builder.getAlbums()
-
-        val recyclerView = findViewById<RecyclerView>(R.id.rvAlbum)
 
         llamar.enqueue(object : Callback<MutableList<AlbumDataModel>> {
             override fun onResponse(
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
 
-                    recyclerView.apply {
+                    binding.rvAlbum.apply {
                         val adapterAlbum = AlbumAdapter(response.body()!!)
                         layoutManager = GridLayoutManager(this@MainActivity, 2)
                         adapter = adapterAlbum

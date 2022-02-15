@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.citesoftware.mediamonkstechchallenge.R
+import com.citesoftware.mediamonkstechchallenge.databinding.CardAlbumBinding
+import com.citesoftware.mediamonkstechchallenge.databinding.CardPhotoBinding
 import com.google.android.material.card.MaterialCardView
 import com.squareup.picasso.Picasso
 
@@ -15,26 +17,24 @@ class PhotoAdapter(private val photoList: MutableList<PhotoDataModel>): Recycler
 
     inner class PhotoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        private val tvPhotoTitle: TextView = itemView.findViewById(R.id.tvPhotoTitle)
-        private val thumbnail: ImageView = itemView.findViewById(R.id.ivThumbnail)
-        private val expanded: ImageView = itemView.findViewById(R.id.ivExpanded)
-        private val photoItem: MaterialCardView = itemView.findViewById(R.id.photoItem)
+        val binding = CardPhotoBinding.bind(itemView)
+
 
         fun bindView(photoList: PhotoDataModel){
             val texto = "${photoList.title} \n (foto ${photoList.id})"
-            tvPhotoTitle.text = texto
-            Picasso.get().load(photoList.thumbnailUrl).into(thumbnail)
-            Picasso.get().load(photoList.url).into(expanded)
+            binding.tvPhotoTitle.text = texto
+            Picasso.get().load(photoList.thumbnailUrl).into(binding.ivThumbnail)
+            Picasso.get().load(photoList.url).into(binding.ivExpanded)
 
-            photoItem.setOnClickListener {
-                if (!expanded.isVisible){
-                    tvPhotoTitle.visibility = View.INVISIBLE
-                    thumbnail.visibility = View.INVISIBLE
-                    expanded.visibility = View.VISIBLE
+            binding.photoItem.setOnClickListener {
+                if (!binding.ivExpanded.isVisible){
+                    binding.tvPhotoTitle.visibility = View.INVISIBLE
+                    binding.ivThumbnail.visibility = View.INVISIBLE
+                    binding.ivExpanded.visibility = View.VISIBLE
                 }else{
-                    tvPhotoTitle.visibility = View.VISIBLE
-                    thumbnail.visibility = View.VISIBLE
-                    expanded.visibility = View.INVISIBLE
+                    binding.tvPhotoTitle.visibility = View.VISIBLE
+                    binding.ivThumbnail.visibility = View.VISIBLE
+                    binding.ivExpanded.visibility = View.INVISIBLE
                 }
             }
 

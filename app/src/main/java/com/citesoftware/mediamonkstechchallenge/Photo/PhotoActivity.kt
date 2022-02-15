@@ -9,14 +9,20 @@ import com.citesoftware.mediamonkstechchallenge.APIrest.InterfaceAPI
 import com.citesoftware.mediamonkstechchallenge.APIrest.ServiceBuilder
 import com.citesoftware.mediamonkstechchallenge.Album.AlbumAdapter
 import com.citesoftware.mediamonkstechchallenge.R
+import com.citesoftware.mediamonkstechchallenge.databinding.ActivityMainBinding
+import com.citesoftware.mediamonkstechchallenge.databinding.ActivityPhotoBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class PhotoActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityPhotoBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo)
+        binding = ActivityPhotoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val albumId = intent.getIntExtra("albumId", 1)
 
@@ -24,17 +30,13 @@ class PhotoActivity : AppCompatActivity() {
 
         val llamar = builder.getPhotos(albumId)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.rvPhoto)
-
-
-
         llamar.enqueue(object : Callback<MutableList<PhotoDataModel>> {
             override fun onResponse(
                 call: Call<MutableList<PhotoDataModel>>,
                 response: Response<MutableList<PhotoDataModel>>
             ) {
                 if (response.isSuccessful){
-                    recyclerView.apply {
+                    binding.rvPhoto.apply {
                         layoutManager = GridLayoutManager(this@PhotoActivity, 2)
                         adapter = PhotoAdapter(response.body()!!)
                     }

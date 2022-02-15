@@ -6,21 +6,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.citesoftware.mediamonkstechchallenge.R
+import com.citesoftware.mediamonkstechchallenge.databinding.CardAlbumBinding
 
 class AlbumAdapter(private val albumList: MutableList<AlbumDataModel>): RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
     inner class AlbumViewHolder(itemView: View, listener: onItemClickListener): RecyclerView.ViewHolder(itemView){
+
+        val binding = CardAlbumBinding.bind(itemView)
 
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
         }
-        private val tvAlbumTitle: TextView = itemView.findViewById(R.id.tvAlbumTitle)
 
         fun bindView(albumList: AlbumDataModel){
             val texto = "${albumList.title} \n (album ${albumList.id})"
-            tvAlbumTitle.text = texto
+            binding.tvAlbumTitle.text = texto
         }
     }
 
