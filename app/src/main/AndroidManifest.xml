@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MediaMonksTechChallenge">
         <activity
             android:name=".Photo.PhotoActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

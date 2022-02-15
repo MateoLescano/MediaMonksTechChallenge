@@ -12,7 +12,7 @@ class AlbumAdapter(private val albumList: MutableList<AlbumDataModel>): Recycler
 
     inner class AlbumViewHolder(itemView: View, listener: onItemClickListener): RecyclerView.ViewHolder(itemView){
 
-        val binding = CardAlbumBinding.bind(itemView)
+        private val binding = CardAlbumBinding.bind(itemView)
 
         init {
             itemView.setOnClickListener {
@@ -33,7 +33,6 @@ class AlbumAdapter(private val albumList: MutableList<AlbumDataModel>): Recycler
     }
 
     fun setOnItemClickListener(listener: onItemClickListener){
-
         mListener = listener
     }
 

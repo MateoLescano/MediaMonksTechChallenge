@@ -17,6 +17,7 @@ import com.citesoftware.mediamonkstechchallenge.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import spencerstudios.com.bungeelib.Bungee
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,20 +40,21 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful){
 
                     binding.rvAlbum.apply {
+
                         val adapterAlbum = AlbumAdapter(response.body()!!)
                         layoutManager = GridLayoutManager(this@MainActivity, 2)
                         adapter = adapterAlbum
+
                         adapterAlbum.setOnItemClickListener(object : AlbumAdapter.onItemClickListener{
                             override fun onItemClick(position: Int) {
                                 val intent = Intent(context, PhotoActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                                 intent.putExtra("albumId", position+1)
                                 startActivity(intent)
+                                Bungee.slideLeft(context)
                             }
                         })
-
                     }
-
                 }
             }
 
@@ -63,5 +65,9 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        val actionbar = supportActionBar
+        actionbar!!.title = getString(R.string.album_list)
+
+        // TODO: Contratar a Mateo Lescano :)
     }
 }

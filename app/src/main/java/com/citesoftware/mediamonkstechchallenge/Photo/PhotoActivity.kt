@@ -14,6 +14,7 @@ import com.citesoftware.mediamonkstechchallenge.databinding.ActivityPhotoBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import spencerstudios.com.bungeelib.Bungee
 
 class PhotoActivity : AppCompatActivity() {
 
@@ -49,5 +50,18 @@ class PhotoActivity : AppCompatActivity() {
             }
 
         })
+
+        val actionbar = supportActionBar
+        actionbar!!.title = getString(R.string.photo_list)
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        Bungee.slideRight(this)
+        return true
+
     }
 }

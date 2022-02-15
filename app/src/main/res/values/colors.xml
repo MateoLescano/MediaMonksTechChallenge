@@ -7,8 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="laser">#Cda776</color>
+    <color name="laser">#99badd</color>
     <color name="grey">#40404F</color>
-    <color name="coffee">#6f4e37</color>
-    <color name="bistre">#3d2b1f</color>
+    <color name="coffee">#4169e1</color>
+    <color name="bistre">#002147</color>
 </resources>

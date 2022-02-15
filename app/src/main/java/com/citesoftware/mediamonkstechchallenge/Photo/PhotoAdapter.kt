@@ -17,12 +17,14 @@ class PhotoAdapter(private val photoList: MutableList<PhotoDataModel>): Recycler
 
     inner class PhotoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        val binding = CardPhotoBinding.bind(itemView)
+        private val binding = CardPhotoBinding.bind(itemView)
 
 
         fun bindView(photoList: PhotoDataModel){
+
             val texto = "${photoList.title} \n (foto ${photoList.id})"
             binding.tvPhotoTitle.text = texto
+
             Picasso.get().load(photoList.thumbnailUrl).into(binding.ivThumbnail)
             Picasso.get().load(photoList.url).into(binding.ivExpanded)
 
@@ -37,7 +39,6 @@ class PhotoAdapter(private val photoList: MutableList<PhotoDataModel>): Recycler
                     binding.ivExpanded.visibility = View.INVISIBLE
                 }
             }
-
         }
     }
 
